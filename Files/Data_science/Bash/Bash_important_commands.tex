@@ -1,0 +1,920 @@
+%\documentclass[10pt,a4paper]{article}
+
+\documentclass[24pt]{article}
+
+\usepackage{arxiv}
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+%\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{lipsum}         % Can be removed after putting your text content
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{forest}
+
+
+\usepackage{tikz} 
+\usepackage{caption}
+\usepackage{amsmath}
+\usepackage{cleveref}       % smart cross-referencing
+\usepackage{colortbl}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{array}
+
+\definecolor{orange151}{rgb}{0.9,0.647,0}
+\definecolor{lgreen}{rgb}{0.564,0.93,0.564}
+
+
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=none,
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+\definecolor{dgreen}{rgb}{0,0.5,0}
+\definecolor{bg}{rgb}{0.125,0.51,0.49}
+\definecolor{mag}{rgb}{0.866,0.627,0.866}
+\definecolor{lgray}{rgb}{0.49,0.49,0.49}
+\definecolor{dgray}{rgb}{0.82,0.788,0.827}
+\definecolor{pink}{rgb}{1, 0.568, 0.686}
+\definecolor{lblue}{rgb}{0.078, 0.741, 0.931}
+\definecolor{orag2}{rgb}{0.87, 0.478, 0.12}
+
+\newcommand*{\addheight}[2][.5ex]{%
+  \raisebox{0pt}[\dimexpr\height+(#1)\relax]{#2}%
+}
+
+%\newcommand{\subf}[2]{%
+%  {\small\begin{tabular}[t]{@{}c@{}}
+%  #1\\#2
+%  \end{tabular}}%
+%}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{definition}[theorem]{Definition}
+
+
+\title{Bash 101}
+
+%\author{ \href{https://orcid.org/0000-0002-8749-3324}{\includegraphics[scale=0.08]{orcid.pdf} \href{mailto: jacques.bourg739@gmail.com}{@}\hspace{1mm} Jacques Bourg    }}
+\author{Jacques Bourg}
+
+
+% Uncomment to override  the `A preprint' in the header
+\renewcommand{\headeright}{}
+\renewcommand{\undertitle}{}
+\renewcommand{\shorttitle}{Bash 101}
+
+
+\hypersetup{
+pdftitle={Bash 101}, 
+pdfsubject={math.NT},
+pdfauthor={Jacques Bourg},
+pdfkeywords={Python, project development, modules},
+}
+ 
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  I give a brief introduction to Bash to help you get started quickly.
+\end{abstract}
+
+\keywords{Bash, Linux, Shell, Command-line interface, Terminal, Scripting, Automation.}
+
+
+
+\section{Introduction to Bash}
+According to wikipedia a shell is a computer program that exposes an operating system's services to a human user or other program. Bourne Again Shell or Bash is the Unix shell  from the  GNU project. It is free, under GPL license.
+
+\section{Commands}
+
+
+\begin{center}
+\begin{tabular}{ | m{2.5cm} | m{6cm}| m{7cm} | } 
+  \hline
+  ~~Command & ~~Description & ~~Example \\ 
+  \hline
+  \center{cd} & change directory & \text{$cd   ~~ ./data$} \\ 
+  \hline
+  \center{mkdir} & create directory & mkdir data \\ 
+  \hline
+  \center{ls} & list files and directories & ls \\   
+  \hline
+\center{cp} & copy files (source -> destination) & \text{cp ./data/source.txt \text{./data/destination.txt}} \\
+  \hline
+\center{mv} & move or rename files & \text{mv ./data/source.txt \text{./data/destination.txt}} \\
+  \hline
+  \center{rm} & rm file (-r remove folders recursively) & rm oldfile.txt \\
+  \hline
+  \center{cat} & concatenate files and print to standard output & cat file1.txt file2.txt > file12combined.txt \\
+ \hline
+ \center{head} & print the head of a file &  head -n 5 data.csv (first 5 lines)\\
+ \hline
+ \center{tail} &  print the tail of a file &  tail -n 5 data.csv (first 5 lines)\\
+ \hline
+ \center{grep} &  look for pattern in a file, return line &  grep 1959 rains.txt:  1964, 10\\
+\hline 
+\center{sed} & find and replace strings in file &  \text{$sed ~~ 's/old\_string/new\_string/g' ~~ data.csv$}   \\
+\hline
+\center{awk} & text processing command & \text{awk '{print \$1, \$3}' data.csv} (1st and 3rd fields of each line) \\
+\hline
+\center{echo} & print text to standard output & echo "Hello, world!" \\
+\hline
+\center{pwd} & print current directory  & \\
+\hline
+\center{env} & list environment variables & \\
+\hline
+\center{ps} & list active processes & \\
+\hline
+\center{top} &  list of processes sorted by cpu usage  & \\
+\hline
+\end{tabular}
+\end{center}
+
+
+\newpage
+
+\begin{center}
+\begin{tabular}{ | m{2.5cm} | m{6cm}| m{7cm} | } 
+  \hline
+  ~~Command & ~~Description & ~~Example \\ 
+\hline
+\center{which} & outputs the full path of the command   & which ls\\
+\hline
+\center{curl} & send a get request&  curl -O https://example.com/image.jpg\\
+\hline
+\center{sudo} & allows executing a command as a superuser & sudo mkdir  \text{new\_directory} \\
+\hline
+\center{history} & prints past commands & \\
+\hline
+\center{clear} & clear the screen  & \\
+\hline
+\center{find} & finds the files which given characteristics  &  find . -name "file.txt"
+\\
+\hline
+\center{man} & user manual of a command  &  man ls\\
+\hline
+\center{kill} &  kill a process  &  kill 1234 (1234 is the process id)\\
+\hline
+\center{expr} &  basic arithmetic in the shell    &  expr 1 + 3 \\
+\hline
+\center{bc} &  basic calculator &   \text{echo "scale = 3; 5 / 4" | bc} \\
+\hline
+\center{exit} &  close the terminal &   \\
+\hline
+\center{reboot} &  reboot the system   &   \\
+\hline
+\center{pip} &  install packages fromPyPI &   pip install numpy \\
+\hline
+\center{ssh} & connect to serves as an user  &   ssh -X user@example.com\\
+\hline
+\end{tabular}
+\end{center}
+
+
+
+\section{Pipes}
+
+Pipes are a way to compose instructions in bash. One can compose 3 commands like this:
+
+\begin{lstlisting}
+command1 | command2 | command3
+\end{lstlisting}
+
+The output of command1 is the input of command2 and the output of command2 is the input of command3.
+
+
+For instance:
+\begin{lstlisting}
+ls | wc -l > file.txt
+\end{lstlisting}
+
+This lists the files and folders in the actual directory, this creates a list, and then we count the lines in the previous list, and outputs the number of files in a file called file.txt. In summary, this command counts the number of files and folders and saves this number in a file.
+
+Example of common pipes in bash:
+
+\begin{lstlisting}
+grep 'Cosette'  lesmiserables.txt | cat | wc -l 
+\end{lstlisting}
+This command counts the number of lines in the file "lesmiserables.txt" that contain the word "Cosette".
+
+\begin{lstlisting}
+cat file.txt | grep "banana"
+\end{lstlisting}
+
+This command outputs the lines contained in file.txt containing the word banana.
+
+\begin{lstlisting}
+cat file.txt | grep "banana" | wc -l
+\end{lstlisting}
+
+This command counts the number of lines containing the word banana in the file file.txt
+
+\begin{lstlisting}
+cat file.txt | grep "banana" | sed 's/banana/apple/'
+\end{lstlisting}
+
+
+\begin{lstlisting}
+cat file.txt | sort | uniq
+\end{lstlisting}
+Sort and removes duplicates.
+
+\begin{lstlisting}
+ls -l | awk '{print $9"\t"$5}' | column -t
+\end{lstlisting}
+Formats the output of ls -l into a table.
+
+\begin{lstlisting}
+ls | wc -l > file_count.txt
+\end{lstlisting}
+creates a file with the count of the number of files. 
+
+\begin{lstlisting}
+ls | wc -l >> file_count.txt
+\end{lstlisting}
+This appends to an existing file the result of ls.
+
+
+ 
+
+
+\subsection{Regex usage in Bash}
+
+Several commands like grep, sed, awk and find use regular expressions for pattern matching. 
+
+\begin{lstlisting}
+> grep -E "Cos[aeiou]tte" lesmiserables.txt
+\end{lstlisting}
+
+\begin{lstlisting}
+> sed -E 's/^Error [0-9]+/Warning/' file.txt
+\end{lstlisting}
+
+Replace error by warning.
+
+\begin{lstlisting}
+> awk '/pattern/ {print}' file.txt
+\end{lstlisting}
+
+Print lines that match a pattern
+
+\begin{lstlisting}
+> find . -regex '.*\.txt'  # Finds all .txt files
+\end{lstlisting}
+
+
+\section{Variables and arrays}
+
+\subsection{Variables}
+We assign string variables by using = sign without space, we call them using \$ symbol. In the terminal:
+\begin{lstlisting}
+> name="Alice"
+> echo $name
+\end{lstlisting}
+
+For numerical variables:
+\begin{lstlisting}
+> (num=14)
+> echo $num
+\end{lstlisting}
+
+\subsection{Arrays}
+As in python, bash uses zero indexing. In the following examples, look at the spaces between the declared array and the equal and the array, there are no commas neither. 
+
+\subsubsection{Numeric and string arrays}
+\begin{lstlisting}
+array_1=(1 2 4)
+array_2=(a b c)
+array_3=("Hello friends" b c)
+array_4=(a b c 4)
+\end{lstlisting}
+
+In example 1 and 2 we declare respectively a numeric array and a string array. In example 3, we declare a string array, and we use double quotes since there are special characters (like space). In example 4, 3 is declared as a string.
+
+We can declare iteratively an array like this:
+
+\begin{lstlisting}
+fruits=()
+fruits[0]="apple"
+fruits[1]="banana"
+fruits[2]="orange"
+\end{lstlisting}
+As we see, bash uses 0 based indexing. Like in python fruits[-1] gives the last element of the array.
+
+
+To access all the elements of an array, use the command @. In for loop one writes:
+\begin{lstlisting}
+for fruit in "${fruits[@]}"; do
+  echo "$fruit"
+done
+\end{lstlisting}
+
+
+To know the length of an array:
+\begin{lstlisting}
+length=${#fruits[@]}
+\end{lstlisting}
+
+One can do slicing:
+\begin{lstlisting}
+for fruit in "${fruits[@]:0:2}"; do
+  echo "$fruit"
+done
+\end{lstlisting}
+0 stands for the starting index and 2 is the last index not included.
+
+One can append to an array: 
+\begin{lstlisting}
+fruits+=("pineapple")
+\end{lstlisting}
+
+One can remove an element from an array: 
+\begin{lstlisting}
+unset fruits[0]   
+\end{lstlisting}
+
+Now the list looks like this:
+\begin{lstlisting}
+echo "${fruits[@]}"
+\end{lstlisting}
+
+This will output:
+banana orange pineapple
+
+Finally, we can concatenate arrays like this:
+\begin{lstlisting}
+fruits=("${fruits[@]:0:2} "${fruits[@]:3}")
+\end{lstlisting}
+
+
+
+\subsubsection{Associative arrays}
+Associative arrays are the equivalent of python dictionary.
+
+\begin{lstlisting}
+declare -A fruits_price
+fruits_price["apple"]=10
+fruits_price["banana"]=5
+fruits_price["orange"]=8
+\end{lstlisting}
+
+or directly:
+\begin{lstlisting}
+declare -A fruits_price=(
+  [apple]=10
+  [banana]=5
+  [orange]=8
+)
+\end{lstlisting}
+
+
+Accessing keys and values: 
+\begin{lstlisting}
+for key in "${!fruits_price[@]}"; do
+  value="${fruits_price[$key]}"
+  echo "$key: $value"
+done
+\end{lstlisting}
+
+To remove a key value pair:
+\begin{lstlisting}
+unset fruits_price["apple"]
+\end{lstlisting}
+
+Using " " around the key makes the key always valid.
+
+
+\section{Control flow statements}
+
+\subsection{While loops}
+
+\begin{lstlisting}
+while condition; do
+    # Commands to execute
+done
+\end{lstlisting}
+
+Example:
+
+\begin{lstlisting}
+#!/usr/bash
+emp_num=1
+while [ $emp_num -le 1000 ];
+do
+    cat "$emp_num-dailySales.txt"|grep'Sales_total'|sed 's/.* ://' > "$emp_num-agg.txt"
+done
+\end{lstlisting}
+
+
+
+\subsection{Until loops}
+
+\begin{lstlisting}
+until condition; do
+    # Commands to execute
+done
+\end{lstlisting}
+
+\subsection{For loops}
+
+Example 1:
+\begin{lstlisting}
+for file in robs_files/*.py
+do  
+    if grep -q 'RandomForestClassifier' $file ; then%        # Move file to folder
+        mv $file to_keep/
+    fi
+done
+\end{lstlisting}
+
+Example 2:
+\begin{lstlisting}
+for file in output_dir/*results*
+\end{lstlisting}
+
+\subsection{Break and continue}
+As in python, these commands interrupt a loop or skip the rest of the loop.
+
+\begin{lstlisting}
+#!/bin/bash
+for i in {1..5}; do
+    if [ $i -eq 3 ]; then
+        echo "Skipping iteration $i"
+        continue  # Skip the rest of the loop when i is 3
+    fi
+    echo "Iteration $i"
+done
+\end{lstlisting}
+
+Example 3:
+\begin{lstlisting}
+for x in {1..3}; do
+    echo "Number: $x"
+done
+\end{lstlisting}
+
+
+Example 4:
+\begin{lstlisting}
+array=(1 2 3)
+for x in "${array[@]}"; do
+    echo "Number: $x"
+done
+\end{lstlisting}
+
+Example 5:
+\begin{lstlisting}
+for (( x=1; x<=3; x++ )); do
+    echo "Number: $x"
+done
+\end{lstlisting}
+
+
+\subsection{Case statements}
+
+General synthax:
+\begin{lstlisting}
+case variable in
+    pattern1)
+        # Commands to execute if variable matches pattern1
+        ;;
+    pattern2)
+        # Commands to execute if variable matches pattern2
+        ;;
+    *)
+        # Commands to execute if no patterns match (default case)
+        ;;
+esac
+\end{lstlisting}
+
+Example:
+
+\begin{lstlisting}
+case $(cat $1) in
+*sydney*)
+mv $1 sydney/ ;;
+*melbourne*|*brisbane*)
+rm $1 ;;
+*canberra*)
+mv $1 "IMPORTANT_$1" ;;
+*)
+echo "No cities found" ;;
+esac
+\end{lstlisting}
+
+\subsection{If}
+\begin{lstlisting}
+if ; then 
+    #command
+else
+    #command
+fi        
+\end{lstlisting}
+
+Example:
+\begin{lstlisting}
+if [ "$number" -gt 10 ]; then
+    echo "The number is greater than 10."
+elif [ "$number" -eq 10 ]; then
+    echo "The number is equal to 10."
+else
+    echo "The number is less than 10."
+fi       
+\end{lstlisting}
+
+
+
+\section{Functions}
+
+In bash functions have the particularity that, by default, they do not encapsulate the code, ie all the variables are global by default (to make a variable local use the command 'local' before the variable instantiation). Also, there is a return command, but it is not used to send back arguments.
+
+
+The general synthax is like this:
+
+\begin{lstlisting}
+function does_something () {
+#code
+}
+\end{lstlisting}
+
+How do we pass arguments ? 
+
+\begin{lstlisting}
+function add_one () {
+  local first_par=$1
+  (( first_par++ ))
+  echo "$first_par"
+}
+\end{lstlisting}
+
+As we see, using \$1, we recover the first argument in the function. We define $\text{first\_par}$ as a local variable and then we increment it of one unit. If we were going to use this function we simply would call it like this:
+\begin{lstlisting}
+> add_one 3
+\end{lstlisting}
+
+To output the result we used the echo command, so that the stdout of the function might be used as the stdin of another function in a pipe.
+
+\begin{lstlisting}
+function generate_numbers() {
+  for i in {1..5}; do
+    echo "$i"
+  done
+}
+function sum_numbers() {
+  total=0
+  while read number; do
+    ((total += number))
+  done
+  echo "Total: $total"
+}
+
+> generate_numbers | sum_numbers
+\end{lstlisting}
+
+Another way to output values in a function is by modifying a global variable:
+\begin{lstlisting}
+total=0
+function sum_to_total() {
+  ((total += $1))
+}
+\end{lstlisting}
+
+This of course has to be used carefully.
+Finally the return command, which is optional, is used to mark success (0) or failure (1 to 255). 
+
+Last example of function: conversion from nautical miles to km/h
+
+\begin{lstlisting}
+function convert_nautical_miles_to_kmh() {
+  echo "scale=4; ($1 * 1.852)" | bc
+}
+\end{lstlisting}
+
+Using the echo command followed by a string "...", we input to the basic calculator bc a command. There are two aspects, the scale, which are the precision (4 decimals) and the computation.
+
+
+\section{Scripts}
+Scripts in bash are files with the extension .sh. They  have a line called the Shebang line.
+
+\begin{lstlisting}
+#!/bin/bash
+
+touch hello.txt
+
+echo "Hello, world!" > hello.txt
+
+echo "File created successfully!"
+\end{lstlisting}
+
+Create this file, name it script.sh, and save it.
+
+Every bash file can be run calling the shell interpreter:
+\begin{lstlisting}
+> bash create_file.sh
+\end{lstlisting}
+
+
+
+Make a script executable means that you can run it directly as a command without explicitly calling the shell interpreter. 
+
+
+
+To make a script executable change the permissions:
+\begin{lstlisting}
+chmod +x create_file.sh
+\end{lstlisting}
+
+And run it using:
+
+\begin{lstlisting}
+> ./create_file.sh
+\end{lstlisting}
+
+\subsection{Virtual environments and PATH variable}
+
+When I call the global variable called PATH, it gives me the list of folders that are available system-wide and that can be accessed by all users and processes on the system. 
+
+\begin{lstlisting}
+> echo $PATH
+/home/jacques/Programmes/Anaconda3/bin:/home/jacques/anaconda3/bin:/home/jacques/Programmes/anaconda3/bin:/home/jacques/Programmes/anaconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin 
+\end{lstlisting}
+ 
+When we activate a virtual environment, it modifies the PATH 
+variable. This allows to use the executables and libraries specific to the virtual environment, instead of the global ones. 
+ 
+ 
+\section{Debugging a bash program}
+
+There are several tools to debug a bash program, let's list some:
+
+- In the execution of the program, print the value of the variables. Here we print the variable var:
+\begin{lstlisting}
+echo "Value of variable: $var"
+\end{lstlisting}
+
+- After a command, we can add the following code:
+\begin{lstlisting}
+command
+if [ $? -ne 0 ]; then
+    echo "Command failed"
+fi
+\end{lstlisting}
+A non nil value means that there is an error.
+
+- At the beginning of a script add set -x, this will print each command and its arguments as they are executed. 
+\begin{lstlisting}
+#!/bin/bash
+set -x  # Enable debugging
+
+# Your script commands here
+
+set +x
+\end{lstlisting}
+
+-Check synthax (option -n):
+\begin{lstlisting}
+> bash -n script.sh
+\end{lstlisting}
+
+-Run in debug mode (-x option):
+\begin{lstlisting}
+> bash -x script.sh
+\end{lstlisting}
+
+\section{Help}
+To get help one can simply use man. For beginners, the level of detail of the documentation is too high, and there are no examples.
+\begin{lstlisting}
+> man ls
+\end{lstlisting}
+
+I advise therefore to use a large language models such as chatgpt or gemini to get examples and check if the commands are valid.
+ 
+
+\section{Time based scheduling}
+  
+\subsection{Cron}
+
+Cron is a time-based job scheduler. To install it:
+\begin{lstlisting}
+> sudo apt install cron
+> sudo apt install systemctl
+\end{lstlisting}
+
+Start and enable it: 
+
+\begin{lstlisting}
+> sudo systemctl start cron
+> sudo systemctl enable cron
+\end{lstlisting}
+
+
+Create a Cron job:
+
+\begin{lstlisting}
+> sudo crontab -e
+\end{lstlisting}
+
+
+In the crontab file add lines like this the following ones:
+
+\begin{lstlisting}
+0 2 * * * python /path/to/your/script/data_processing.py
+\end{lstlisting}  
+  
+\begin{lstlisting}
+46 14 * * * bash /home/jacques/Bureau/cron_test/myscript.sh
+\end{lstlisting}  
+  
+\begin{lstlisting}  
+echo /path/to/myscript.sh | at 13:55
+\end{lstlisting}  
+  
+  
+46 14 * * * stands for 46 minutes (0-59), 2 pm (0-23), * any day of the month (1-31), * any month (1-12), * day of Week (0-7, where both 0 and 7 represent Sunday). 
+
+In order to check that cron works, you can make a simple script myscript.sh like:
+
+\begin{lstlisting}
+#!/bin/bash
+
+now=$(date +"%Y-%m-%d %H:%M:%S")
+
+echo "$now - Cron is working!" >> /home/jacques/Bureau/cron_test/cron_log.txt
+\end{lstlisting}
+
+
+To stop Cron: 
+\begin{lstlisting}
+> sudo systemctl stop cron
+\end{lstlisting}
+
+To list all the Cron tasks: 
+\begin{lstlisting}
+> crontab -l
+\end{lstlisting}
+
+
+
+
+\subsubsection{More advanced scheduling synthax}
+
+\begin{lstlisting}
+15,30 * * * * bash script.sh
+\end{lstlisting}
+This synthax means that the script will run at 0:15 and 0:30, 1:15 and 1:30, 2:15 ...
+
+
+\begin{lstlisting}
+*/30 * * * * bash script.sh
+\end{lstlisting}
+This synthax means that the script will every 15 minutes.
+
+\subsubsection{Event based scheduling}
+
+One can also use cron for event-based scheduling: create a file to signal an event, and then in the crontab add the following line: 
+
+\begin{lstlisting}
+* * * * * if [ -f "/path/to/event_file" ]; then python /path/to/your/script/event_triggered_script.py; rm "/path/to/event_file"; fi
+\end{lstlisting}
+
+
+\section{Mounting a server on each reboot}
+  
+Let's imagine that you want to mount a server each time you reboot your PC, we want a bash script that does that for us, this script will be called \text{$mount\_server.sh$}.  
+  
+We will need sshfs (secure shell file system):
+
+\begin{lstlisting}
+sudo apt install sshfs  
+\end{lstlisting}
+
+  
+  
+\begin{lstlisting}
+#!/bin/bash
+
+mount_point="/mnt/isaac_server"
+server_address= "10.1.100.28" # replace
+
+username="jbourg"    # replace
+password="1234"      # replace
+
+sshfs -o IdentityFile=/path/to/your/ssh/key username@server_address:$mount_point
+
+if [ $? -eq 0 ]; then
+  echo "Server mounted successfully!"
+else
+  echo "Failed to mount server. Check your credentials and network connection."
+fi
+\end{lstlisting}
+ 
+Reference this code in rc.local,
+
+\begin{lstlisting}
+> sudo nano /etc/rc.local
+\end{lstlisting}
+
+by adding the following line at the end: 
+
+\begin{lstlisting}
+ /path/to/your/mount_server.sh  
+\end{lstlisting}
+
+Then restart the system.
+
+
+\section{The fstab file}
+
+The fstab file ("file systems table") is a configuration file in Unix operating systems that defines how devices, and remote filesystems are mounted into the filesystem. This tab is located at /etc/fstab. 
+
+Each line follows the following structure 
+<file system> <mount point> <type> <options> <dump> <pass>
+ 
+ 
+If you want to make a modification, it is a good practice to make a copy if it before:
+
+\begin{lstlisting}
+> sudo cp /etc/fstab /etc/fstab.bak
+\end{lstlisting}
+ 
+Then open the file and edit it without changing its permissions:
+
+\begin{lstlisting}
+> sudo nano /etc/fstab
+\end{lstlisting}
+
+ 
+ 
+ 
+Before rebooting, do:
+\begin{lstlisting}
+> sudo mount -a
+\end{lstlisting}
+and verify that there are no errors, this could prevent from rebooting properly.
+ 
+ 
+\subsection{Adding a NAS in the fstab} 
+ 
+First create a folder in the mount folder: 
+\begin{lstlisting}
+sudo mkdir -p /mnt/nas
+\end{lstlisting}
+
+Then if you have a NAS  whose network path is //192.168.1.100/share add to your fstab
+ 
+\begin{lstlisting}
+//192.168.1.100/share /mnt/nas cifs username=your_username,password=your_password,uid=1000,gid=1000,iocharset=utf8 0 0
+\end{lstlisting}
+
+
+ 
+
+
+  
+
+ 
+
+
+
+
+
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+
+
+\end{document}
+
+

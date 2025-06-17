@@ -1,0 +1,13 @@
+README.md
+setup.py
+package_data_science_project.egg-info/PKG-INFO
+package_data_science_project.egg-info/SOURCES.txt
+package_data_science_project.egg-info/dependency_links.txt
+package_data_science_project.egg-info/requires.txt
+package_data_science_project.egg-info/top_level.txt
+src/__init__.py
+src/models/__init__.py
+src/models/operations.py
+src/utils/__init__.py
+tests/__init__.py
+tests/test_operations.py

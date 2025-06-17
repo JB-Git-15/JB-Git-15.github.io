@@ -1,0 +1,11 @@
+\BOOKMARK [1][-]{section.1}{Imports}{}% 1
+\BOOKMARK [1][-]{section.2}{GPU availability}{}% 2
+\BOOKMARK [1][-]{section.3}{Variables}{}% 3
+\BOOKMARK [1][-]{section.4}{Conversion}{}% 4
+\BOOKMARK [1][-]{section.5}{Basic operations}{}% 5
+\BOOKMARK [1][-]{section.6}{Dimensionality}{}% 6
+\BOOKMARK [1][-]{section.7}{Automatic differentiation}{}% 7
+\BOOKMARK [1][-]{section.8}{Neural network layers and activation functions}{}% 8
+\BOOKMARK [1][-]{section.9}{Networks}{}% 9
+\BOOKMARK [1][-]{section.10}{Model and optimizer}{}% 10
+\BOOKMARK [1][-]{section.11}{Train a network}{}% 11

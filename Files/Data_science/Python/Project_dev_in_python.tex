@@ -1,0 +1,543 @@
+%\documentclass[10pt,a4paper]{article}
+
+\documentclass[24pt]{article}
+
+\usepackage{arxiv}
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+%\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{lipsum}         % Can be removed after putting your text content
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{forest}
+
+
+\usepackage{tikz} 
+\usepackage{caption}
+\usepackage{amsmath}
+\usepackage{cleveref}       % smart cross-referencing
+\usepackage{colortbl}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{multicol}
+
+
+\definecolor{orange151}{rgb}{0.9,0.647,0}
+\definecolor{lgreen}{rgb}{0.564,0.93,0.564}
+
+
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=none,
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+\definecolor{dgreen}{rgb}{0,0.5,0}
+\definecolor{bg}{rgb}{0.125,0.51,0.49}
+\definecolor{mag}{rgb}{0.866,0.627,0.866}
+\definecolor{lgray}{rgb}{0.49,0.49,0.49}
+\definecolor{dgray}{rgb}{0.82,0.788,0.827}
+\definecolor{pink}{rgb}{1, 0.568, 0.686}
+\definecolor{lblue}{rgb}{0.078, 0.741, 0.931}
+\definecolor{orag2}{rgb}{0.87, 0.478, 0.12}
+
+\newcommand*{\addheight}[2][.5ex]{%
+  \raisebox{0pt}[\dimexpr\height+(#1)\relax]{#2}%
+}
+
+%\newcommand{\subf}[2]{%
+%  {\small\begin{tabular}[t]{@{}c@{}}
+%  #1\\#2
+%  \end{tabular}}%
+%}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{definition}[theorem]{Definition}
+
+
+\title{Guidelines for project development in python}
+
+%\author{ \href{https://orcid.org/0000-0002-8749-3324}{\includegraphics[scale=0.08]{orcid.pdf} \href{mailto: jacques.bourg739@gmail.com}{@}\hspace{1mm} Jacques Bourg    }}
+\author{Jacques Bourg}
+
+
+% Uncomment to override  the `A preprint' in the header
+\renewcommand{\headeright}{}
+\renewcommand{\undertitle}{}
+\renewcommand{\shorttitle}{Guidelines for project development in python}
+
+
+\hypersetup{
+pdftitle={Guidelines for project development in python},
+pdfsubject={math.NT},
+pdfauthor={Jacques Bourg},
+pdfkeywords={Python, project development, modules},
+}
+ 
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+ In this document, I outline some best practices for Python project development, such as file structure, unit tests, code quality, and package creation. 
+\end{abstract}
+
+\keywords{Python, project development, modules}
+
+\section{Project structure}
+
+\subsection{Tree structure}
+ 
+\scriptsize
+\begin{forest}
+  for tree={
+    font=\ttfamily,
+    grow'=0,
+    child anchor=west,
+    parent anchor=south,
+    anchor=west,
+    calign=first,
+    edge path={
+      \noexpand\path [draw, \forestoption{edge}]
+      (!u.south west) +(4.5pt,0) |- node[fill,inner sep=1.25pt] {} (.child anchor)\forestoption{edge label};
+    },
+    before typesetting nodes={
+      if n=1
+        {insert before={[,phantom]}}
+        {}
+    },
+    fit=band,
+    before computing xy={l=15pt},
+  }
+[$\text{data\_science\_project}$
+  [README.md]
+  [.gitignore]
+  [environment.yml]
+  [$\text{main.py}$] 
+  [src
+    [$\text{\_\_init\_\_.py}$]
+    [$\text{utils}$]
+    [$\text{models}$] 
+  ]
+  [tests
+    [$\text{test\_utils.py}$]
+    [$\text{\_\_init\_\_.py}$]
+  ]
+  [notebooks
+    [$\text{algo\_v1.ipynb}$]
+  ]
+  [data
+   [raw
+    [dataset\_1.csv]
+    ]
+   [processed
+    [output.csv]
+    ]
+   ]
+  [models
+    [$\text{mini\_vgg16.pth}$]
+  ]   
+  [docs
+  ]
+  ]
+]\end{forest}
+
+
+
+In bash, in order to see the tree like structure do in the root folder:
+ \begin{lstlisting}
+> tree
+\end{lstlisting}
+
+To install the command tree:
+\begin{lstlisting}
+> sudo apt install tree
+\end{lstlisting}
+
+
+\subsection{Readme}
+ The readme is an essential part of a project. In order to be well written write a prominent heading with the name, followed by a concise description of the project. Write a table of contents. Explain step by step how to install and set up the project including code snippets:  include dependencies, virtual environments. Then provide instructions on how to run the project, basic commands to start, and a reference for documentation and 
+ jupyter notebooks of usage cases. Finally, specify the license under which your code is distributed.
+A nice way to format the code, is to write it in markdown.
+
+
+\subsection{.gitignore file}
+
+A good practice when developing a project is to exclude 
+temporary files, generated data, and large datasets from git tracking. Here is a non exhaustive list of files and folders that one usually puts into the .gitignore file .
+
+.*,
+*.pyc,
+*.lib,
+\_\_pycache\_\_/,
+.pytest\_cache/,
+.ipynb\_checkpoints/,
+*.h5,
+*.hdf5,
+*.pth,
+*.pt,
+*.tf,
+*.keras,
+*.onnx,
+*.pb,
+*.pb.gz,
+*.json,
+*.yaml,
+*.cfg,
+*.log,
+data/,
+docs/,
+
+\subsection{Conda environment}
+To create a virtual environment, first install miniconda, and then run in bash:
+
+\begin{lstlisting}
+> conda create -n env_project python=3.10 
+\end{lstlisting}
+
+To activate your environment:
+
+\begin{lstlisting}
+> conda activate env_project
+\end{lstlisting}
+
+To install numpy in the newly created environment:
+
+\begin{lstlisting}
+(env_project)> conda install anaconda::numpy
+\end{lstlisting}
+
+Once you installed all the dependencies you need, you can generate
+the environment.yml file using the command
+
+\begin{lstlisting}
+conda env_project export > environment.yml
+\end{lstlisting}
+
+To recreate the environment $\text{env\_project}$:
+
+
+\begin{lstlisting}
+conda env create -f environment.yml
+\end{lstlisting}
+
+\subsection{Modules}
+
+The src file is the core of the application. It has to be organized in modules. To create a module 'algorithms', create a folder of the same name, create a \_\_init\_\_.py file (can be left empty). These files are used to indicate to  python that a directory should be treated as a package, and then allow the module importation using the dot notation. For instance, to  import a function $\text{plot\_pairs}$ in main.py: 
+
+\begin{lstlisting}
+from utils.visualisation import plot_pairs
+\end{lstlisting}
+
+The init file is run only once, at the importation of the module, so that you can insert in this file imports (for instance importing a class that you are going to use later).
+
+\begin{lstlisting}
+from .utils import PlotTool
+\end{lstlisting}
+
+After having done this last importation in the init file, I can now import directly in the main:
+
+\begin{lstlisting}
+from src import PlotTool
+\end{lstlisting}
+
+
+
+\subsection{Unitary tests}
+
+In VSCode, in your environment, choose a testing framework, with VIEW /COMMAND PALETTE/ PYTEST, and choose the folder named 'tests'. It will install
+pytest in your environment. Be sure to have an init file in your test folder.
+The tests should be non trivial, and organized according to the functionality they cover, always the syntax $test\_X$, in which X is the function you want to test.
+
+\begin{lstlisting}
+from src.models.operations import Operations
+def test_calculate_average():
+    assert Operations.calculate_average([2, 2, 6, 6]) == 4
+\end{lstlisting}
+
+
+The tests should aim at covering all the code. One good practice is to build data from scratch and plug it to the functionality we want to test, in order to ensure independence of the tests. Before a merge request one runs all the tests and is sure that all the tests pass and that no functionality was broken. 
+
+
+
+
+
+\subsection{Jupyter notebooks}
+
+\subsubsection{Adding a kernel to jupyter notebook}
+
+In order to develop your algorithms in jupyter notebook, install ipykernel in your conda environment called env\_project.
+\begin{lstlisting}
+> conda activate env_project
+> conda install ipykernel
+\end{lstlisting}
+
+Then register the kernel with jupyter.
+
+\begin{lstlisting}
+> python -m ipykernel install --user --name=env_project
+\end{lstlisting}
+
+\subsubsection{Function development}
+
+I use to develop my code at the end of a jupyter notebook, in cells to check that all the variables do what I want them to do. Whem I am satisfied about the result, I encapsulate them in functions, that I transfer to the modules in the src, and we can now call them in the  pipeline developed in the jupyter notebook. To avoid having to restart the kernel, and having to reload all the cells again (which can be very tedious), add the following command before the imports (be sure ipython is installed in your environment).
+In this way, the changes in the code in the src will be reflected seamlessly in the notebook.
+
+
+
+\begin{lstlisting}
+%load_ext autoreload
+%autoreload 2
+\end{lstlisting}
+
+
+
+  
+\section{Debugging}
+
+The debugging can be configured in VScode by changing the hidden file $\text{.vscode/launch.json}$. For instance:
+\begin{lstlisting}
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}"
+        }
+    ]
+}
+\end{lstlisting}
+
+To start debugging in VScode, put a breakpoint in your main code for instance, select the right environment (bottom right of VScode) and then choose the top right play button choosing the option "Python Debugger file: Debug Python File".
+
+
+\section{Code quality}
+
+In order to assure a good code quality, one should learn to write in a way that is standard and that can be read by any developer. Python has a series of guidelines, called  \href{https://peps.python.org/pep-0008/}{Pep-8}, with the  objective of having clean and maintainable code.
+
+
+Linters are tools that analyse code to identify and correct stylistic issues. Ruff is one of them. Once installed in your environment, format your documents using $\text{ctrl + shift + i}$.
+Also a good practice is to put docstrings. The following is a  NumPy-style docstring:
+
+\begin{lstlisting}
+def calculate_average(number:list):
+  """Calculates the average of a list of numbers.
+
+  Args:
+    numbers: A list of numbers.
+
+  Returns:
+    av: float, average of the numbers.
+  """
+\end{lstlisting}
+
+In reStructuredText, the docstring is like:
+
+\begin{lstlisting}
+def calculate_average(number_list:list):
+        """
+        Calculates the average of a list of numbers.
+
+        :param number_list: A list of numbers.
+        :type number_list: list of float
+        :return: The average of the numbers.
+        :rtype: float
+        """
+\end{lstlisting}
+
+
+
+One can also check the type of the inputs. This can be done trough methods such as $\text{check\_array}$ (available in scikit-learn and scikit-image).
+
+
+\begin{lstlisting}
+check_array(
+        image,
+        ndim=3,
+        dtype=[np.uint8, np.uint16, np.int32, np.int64,
+               np.float32, np.float64])
+\end{lstlisting}
+
+When the input parameter can only take a given set of values, we can also verify all the cases:  
+
+\begin{lstlisting}
+if method == "median":
+        projected_image = np.nanmedian(in_focus_image, axis=0)
+    elif method == "max":
+        projected_image = np.nanmax(in_focus_image, axis=0)
+    else:
+        raise ValueError("Parameter 'method' should be 'median' or 'max', not "
+                         "'{0}'.".format(method))
+\end{lstlisting}
+
+
+
+
+There are important organizational principles: a good practice is to write one class (in PascalCase) per python file (in lower case with underscores). Functions also have to be simple: one function does only one thing. Functions with similar functionalities should be grouped together. Helper functions should go to the utils module. 
+Another important aspect to have a clear code is to organize the imports: third party libraries first, built imports (imports that are specific to python such as os, sys...) and then import local files and relative imports. 
+
+
+
+\section{Documentation}
+
+There are several tools like Mkdocs and Sphinx to generate automatic documentation of your code based on the docstrings.  For instance, Sphinx imposes to use certain synthax like ReStructuredText or markdown format for writing documentation, so that headers, lists, and code blocks appear in a nice looking way.
+
+ Some quick guidelines for generating the documentation in Sphinx. In your 
+ environment, install sphinx.
+
+\begin{lstlisting}
+> conda activate env_project
+> conda install conda-forge::sphinx
+\end{lstlisting}
+
+Place yourself in the doc folder.
+
+\begin{lstlisting}
+(env_project)> cd docs
+\end{lstlisting}
+
+Run sphinx:
+
+\begin{lstlisting}
+(env_project)> sphinx-quickstart
+\end{lstlisting}
+
+
+Install the $\text{sphinx\_rtd\_theme}$:
+\begin{lstlisting}
+(env_project)> pip install sphinx_rtd_theme
+\end{lstlisting}
+
+
+Configure the config file:
+
+\begin{lstlisting}
+import os
+import sys
+sys.path.insert(0, os.path.abspath('../src'))
+
+import sphinx_rtd_theme
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.napoleon', 'sphinx_rtd_theme',]
+html_theme = 'sphinx_rtd_theme
+\end{lstlisting}
+
+Configure the index file:
+
+\begin{lstlisting}
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+
+Modules
+=======
+
+.. automodule:: models.operations
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. automodule:: utils
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
+\end{lstlisting}
+
+
+Finally, generate the documentation:
+\begin{lstlisting}
+(env_project)> make html
+\end{lstlisting}
+
+The documentation will be located in 
+$\text{docs/\_build/html}$. This file usually is not tracked in git.
+
+
+\section{Package creation}
+
+Once the code is ready, install setuptools in your environment, and then create a setup.py file: 
+
+\begin{lstlisting}
+from setuptools import setup, find_packages
+
+
+setup(
+    name="package_data_science_project",
+    version="0.1.0",
+    description="Test package",
+    author="JB",
+    author_email="your_email@example.com",
+    packages=find_packages(),
+    install_requires=["numpy"]
+)
+\end{lstlisting}
+
+Then install your package:
+\begin{lstlisting}
+> python setup.py develop
+\end{lstlisting}
+
+and finally create a distribution:
+
+\begin{lstlisting}
+> python setup.py sdist bdist_wheel
+\end{lstlisting}
+
+This will generate additional folders: build, dist, \text{package\_data\_science}.
+
+
+
+
+
+
+
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+
+
+\end{document}
+
+
+
+
+
+
+

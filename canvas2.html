@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="robots" content="noindex, nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="stylesheet" href="bulma-no-dark-mode.min.css">
+</head>
+<body>
+
+    <nav>
+        <ul class="tabs is-boxed is-narrow is-toggle">
+            <li class="tab"><a href="about.html">About</a></li>
+            <li class="tab"><a href="data_science.html">Data-science</a></li>
+            <li class="tab"><a href="research.html">Research</a></li>
+            <li class="tab"><a href="teaching.html">Teaching</a></li>
+            <li class="tab is-active"><a href="canvas2.html">Canvas</a></li>
+        </ul>
+      </nav>
+
+
+
+
+
+ <div class ="field">
+        <canvas id="canvas"></canvas>  
+        <div class="tools">
+            <button onClick = "clear_canvas()" type="button" class="button">Clear</button>
+            <button onclick="createSymmetricImage()" type="button" class="button" > Mirror</button>
+            <button onclick="overlayRotatedImage()" type="button" class="button" > Flower</button>
+            <div onClick="change_color(this)" class="color-field" style="background: red;"></div>
+            <div onClick="change_color(this)" class="color-field" style="background: blue;"></div>
+            <div onClick="change_color(this)" class="color-field" style="background: green;"></div>
+            <div onClick="change_color(this)" class="color-field" style="background: yellow;"></div>
+
+            <input onInput="draw_color = this.value" type = "color" class="color-picker">
+            <input type = "range" min="1" max="100" class="pen-range"
+                onInput= "draw_width = this.value">
+        </div>
+    </div>
+    <script src="main.js"></script>
+
+ 
+</body>
+</html>

@@ -1,0 +1,7 @@
+Metadata-Version: 2.1
+Name: package_data_science_project
+Version: 0.1.0
+Summary: Test package
+Author: JB
+Author-email: your_email@example.com
+Requires-Dist: numpy

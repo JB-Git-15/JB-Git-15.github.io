@@ -1,0 +1,28 @@
+\BOOKMARK [1][-]{section.1}{Introduction to Bash}{}% 1
+\BOOKMARK [1][-]{section.2}{Commands}{}% 2
+\BOOKMARK [1][-]{section.3}{Pipes}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Regex usage in Bash}{section.3}% 4
+\BOOKMARK [1][-]{section.4}{Variables and arrays}{}% 5
+\BOOKMARK [2][-]{subsection.4.1}{Variables}{section.4}% 6
+\BOOKMARK [2][-]{subsection.4.2}{Arrays}{section.4}% 7
+\BOOKMARK [3][-]{subsubsection.4.2.1}{Numeric and string arrays}{subsection.4.2}% 8
+\BOOKMARK [3][-]{subsubsection.4.2.2}{Associative arrays}{subsection.4.2}% 9
+\BOOKMARK [1][-]{section.5}{Control flow statements}{}% 10
+\BOOKMARK [2][-]{subsection.5.1}{While loops}{section.5}% 11
+\BOOKMARK [2][-]{subsection.5.2}{Until loops}{section.5}% 12
+\BOOKMARK [2][-]{subsection.5.3}{For loops}{section.5}% 13
+\BOOKMARK [2][-]{subsection.5.4}{Break and continue}{section.5}% 14
+\BOOKMARK [2][-]{subsection.5.5}{Case statements}{section.5}% 15
+\BOOKMARK [2][-]{subsection.5.6}{If}{section.5}% 16
+\BOOKMARK [1][-]{section.6}{Functions}{}% 17
+\BOOKMARK [1][-]{section.7}{Scripts}{}% 18
+\BOOKMARK [2][-]{subsection.7.1}{Virtual environments and PATH variable}{section.7}% 19
+\BOOKMARK [1][-]{section.8}{Debugging a bash program}{}% 20
+\BOOKMARK [1][-]{section.9}{Help}{}% 21
+\BOOKMARK [1][-]{section.10}{Time based scheduling}{}% 22
+\BOOKMARK [2][-]{subsection.10.1}{Cron}{section.10}% 23
+\BOOKMARK [3][-]{subsubsection.10.1.1}{More advanced scheduling synthax}{subsection.10.1}% 24
+\BOOKMARK [3][-]{subsubsection.10.1.2}{Event based scheduling}{subsection.10.1}% 25
+\BOOKMARK [1][-]{section.11}{Mounting a server on each reboot}{}% 26
+\BOOKMARK [1][-]{section.12}{The fstab file}{}% 27
+\BOOKMARK [2][-]{subsection.12.1}{Adding a NAS in the fstab}{section.12}% 28

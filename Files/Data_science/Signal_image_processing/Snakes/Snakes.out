@@ -1,0 +1,20 @@
+\BOOKMARK [1][-]{section.1}{Snakes}{}% 1
+\BOOKMARK [1][-]{section.2}{Theory}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Image energy}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Elastic energy}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Smooth energy}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.4}{Local minimization of the energy}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.5}{Algorithms}{section.2}% 7
+\BOOKMARK [2][-]{subsection.2.6}{Global algorithm}{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.7}{Resample contour}{section.2}% 9
+\BOOKMARK [2][-]{subsection.2.8}{Interpolate coordinates}{section.2}% 10
+\BOOKMARK [2][-]{subsection.2.9}{Compute motion}{section.2}% 11
+\BOOKMARK [2][-]{subsection.2.10}{Clamp coordinates}{section.2}% 12
+\BOOKMARK [2][-]{subsection.2.11}{Energy minimization}{section.2}% 13
+\BOOKMARK [1][-]{section.3}{Implementation}{}% 14
+\BOOKMARK [2][-]{subsection.3.1}{Image gradient}{section.3}% 15
+\BOOKMARK [2][-]{subsection.3.2}{Control points}{section.3}% 16
+\BOOKMARK [2][-]{subsection.3.3}{Contours}{section.3}% 17
+\BOOKMARK [2][-]{subsection.3.4}{Shape energy terms}{section.3}% 18
+\BOOKMARK [2][-]{subsection.3.5}{Results}{section.3}% 19
+\BOOKMARK [1][-]{section.4}{Conclusion}{}% 20
